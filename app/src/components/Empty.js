@@ -3,7 +3,7 @@ import React from 'react';
 const Empty = () => {
         return(
             <div>
-                <img src="/img/empty.gif" alt="empty"/>
+                <img src="/img/empty.gif" alt="Empty"/>
             </div>
         )
 }

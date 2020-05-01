@@ -1,5 +1,7 @@
 import React from 'react';
 import Root from './page/Root';
+import PrimaryButton from './components/PrimaryButton';
+import Form from './components/Form';
 import { TodoProvider } from './services/Todo';
 import './App.css';
 
@@ -8,7 +10,9 @@ function App() {
     <div className="App">
       <TodoProvider>
         <Root/>
-      </TodoProvider>    
+      </TodoProvider>   
+      <PrimaryButton/> 
+      <Form/>
     </div>
   );
 }

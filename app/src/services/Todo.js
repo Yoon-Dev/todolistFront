@@ -15,15 +15,20 @@ export const useTodos = () => {
 // hook du composant todosProvider
 const useData = () => {
     const [todos, setTodos] = useState(null);
+    const [load, setLoad] = useState(true);
+
     useEffect(() => {
+            if(load){
                 fetchData(process.env.REACT_APP_API_TODOS, { signal: signal.signal }).then(res => {
                     setTodos({...res}); 
                 })
+                setLoad(false)
+            }
         return () => {
             // cleanup
             signal.abort();
         };
-    }, []);
+    }, [load]);
 
     return todos;
         
