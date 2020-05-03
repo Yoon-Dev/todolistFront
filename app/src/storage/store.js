@@ -1,16 +1,16 @@
 import { createStore } from 'redux'
 
 
-function state(state = {addtodo: false, addlabel: false, reload: false}, action) {
+function state(state = {addtodo: false, addlabel: false, reload: false, edit: null, lastAction: "CLEARINIT"}, action) {
   switch (action.type) {
     case 'ADDTODO':
-      return state = {addtodo: true, addlabel: false, reload: false}
-    case 'ADDLABEL':
-      return state = {addtodo: false, addlabel: true, reload: false}
+      return state = {addtodo: true, addlabel: false, reload: false, edit: action.data, lastAction: action.type}
     case 'CLEAR':
-      return state = {addtodo: false, addlabel: false, reload: false}
+      return state = {addtodo: false, addlabel: false, reload: false, edit: null, lastAction: action.type}
     case 'CLEARRELOAD':
-      return state = {addtodo: false, addlabel: false, reload: action.data}
+      return state = {addtodo: false, addlabel: false, reload: action.data, edit: null, lastAction: action.type}
+    case 'CLEAREDIT':
+      return state = {addtodo: false, addlabel: false, reload: false, edit: action.data, lastAction: action.type}
     default:
       return state
   }
@@ -18,7 +18,3 @@ function state(state = {addtodo: false, addlabel: false, reload: false}, action)
 
 
 export let store = createStore(state)
-
-// You can use subscribe() to update the UI in response to state changes.
-// Normally you'd use a view binding library (e.g. React Redux) rather than subscribe() directly.
-// However it can also be handy to persist the current state in the localStorage.

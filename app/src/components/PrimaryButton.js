@@ -5,7 +5,7 @@ import { store } from '../storage/store';
 
 const PrimaryButton = () => {
         return(
-            <Fab color="primary" aria-label="add" className="float" onClick={() => store.dispatch({ type: 'ADDTODO'})}>
+            <Fab color="primary" aria-label="add" className="float" onClick={() => store.dispatch({ type: 'ADDTODO', data: null})}>
                 <AddIcon />
             </Fab>
         )

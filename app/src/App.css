@@ -16,7 +16,15 @@ html, body{
   align-items: center;
   justify-content: center;
 }
-
+/* °°°°°°°°°°°°°°°°°°°°° */
+/* UTILS */
+/* °°°°°°°°°°°°°°°°°°°°° */
+.hidden{
+  display: none !important;
+}
+.show{
+  display: block !important;
+}
 /* °°°°°°°°°°°°°°°°°°°°° */
 /* PRIMARY_BUTTON */
 /* °°°°°°°°°°°°°°°°°°°°° */
@@ -25,4 +33,16 @@ html, body{
   position: fixed !important;
   right: 0;
   bottom: 0;
+}
+/* °°°°°°°°°°°°°°°°°°°°° */
+/* TODO */
+/* °°°°°°°°°°°°°°°°°°°°° */
+.todo-item{
+  margin: 0px 10% 15px 10%;
+}
+.todo-done{
+  text-align: end;
+}
+.todo-edit{
+  text-align: start;
 }

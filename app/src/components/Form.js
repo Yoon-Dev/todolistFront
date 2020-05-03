@@ -2,22 +2,24 @@ import React, { useState } from 'react';
 import { store } from '../storage/store';
 import Grid from '@material-ui/core/Grid';
 import TodoForm from './TodoForm';
-import { postTodoData } from '../utils/data';
+import { postTodoData, editTodo } from '../utils/data';
 
 const Form = () => {
     const [isTodoActive, setisTodoActive] = useState(store.getState().addtodo);
-    const [isLabelActive, setisLabelActive] = useState(store.getState().addlabel);
     store.subscribe(() => {
         setisTodoActive(store.getState().addtodo)
-        setisLabelActive(store.getState().addlabel)
     })
 // °°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°
-    const addDb = (type, value) => {
+    const addDb = (type, value, id = null) => {
         switch (type) {
             case 'todo':
                 postTodoData(process.env.REACT_APP_API_ADDTODO, value)
                 store.dispatch({type : "CLEARRELOAD", data: value})
+                break;
+            case 'edittodo':
+                editTodo(process.env.REACT_APP_API_EDITTODO, value, id)
+                store.dispatch({type : "CLEAREDIT", data: {id: id, ...value}})
                 break;
             case 'label':
                 console.log(value)
@@ -35,17 +37,9 @@ const Form = () => {
             return(
                 <Grid container className="abs">
                     <Grid item xs={12}>
-                        <TodoForm add={addDb}/>
+                        <TodoForm add={addDb} edit={store.getState().edit}/>
                     </Grid>
                 </Grid>            
-            )
-        case isLabelActive:
-            return(
-                <Grid container className="abs">
-                    <Grid item xs={12}>
-                        <div>FormLabel</div>
-                    </Grid>
-                </Grid>   
             )
         default:
             return(

@@ -37,7 +37,6 @@ export const postTodoData = (url, value) => {
     formdata.append("name", value.name);
     formdata.append("detail", value.detail);
     formdata.append("date", value.date);
-    formdata.append("label", value.label);
     
     var requestOptions = {
       method: 'POST',
@@ -56,19 +55,41 @@ export const postTodoData = (url, value) => {
 
 }
 
-export const postLabelData = (url, value) => {
-    var formdata = new FormData();
-    formdata.append("name", value.name);
-    formdata.append("color",value.color);
-    
-    var requestOptions = {
-      method: 'POST',
-      body: formdata,
-      redirect: 'follow'
-    };
-    
-    fetch(url, requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => alert('error', error));
+export const delTodo = (url, id) => {
+  var requestOptions = {
+    method: 'DELETE',
+    redirect: 'follow'
+  };
+  
+  fetch(`${url}/${id}`, requestOptions)
+    .then(response => response.text())
+    .then(result => {
+      if(result !== 'true'){
+          alert(`Il y a eu un problème, désolé :( ${result}`)
+      }
+    })
+    .catch(error => alert(`Il y a eu un problème, désolé :( ${error}`));
 }
+
+export const editTodo = (url, data, id) => {
+  
+  var formdata = new FormData();
+  formdata.append("name", data.name);
+  formdata.append("detail", data.detail);
+  formdata.append("date", data.date);
+  
+  var requestOptions = {
+    method: 'POST',
+    body: formdata,
+    redirect: 'follow'
+  };
+  
+  fetch(`${url}/${parseInt(id)}`, requestOptions)
+    .then(response => response.text())
+    .then(result => {
+      if(result !== 'true'){
+          alert(`Il y a eu un problème, désolé :( ${result}`)
+      }
+    })
+    .catch(error => alert(`Il y a eu un problème, désolé :( ${error}`));
+} 
