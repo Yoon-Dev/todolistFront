@@ -22,7 +22,6 @@ const Form = () => {
                 store.dispatch({type : "CLEAREDIT", data: {id: id, ...value}})
                 break;
             case 'label':
-                console.log(value)
                 break;
             default:
                 alert(`Il c'est produit une erreur désolé`)

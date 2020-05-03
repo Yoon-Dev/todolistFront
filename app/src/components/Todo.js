@@ -46,7 +46,7 @@ const Todo = props => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
         return(
-            <Card className="todo-item" ref={self}>
+            <Card className="todo-item" ref={self} data-name={name}>
                 <CardContent>
                     <Grid container justify="center">
                         <Grid item xs={6} className="todo-edit">

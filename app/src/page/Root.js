@@ -32,7 +32,6 @@ const Root = () => {
 // °°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°
     useEffect(() => {
-        console.log(store.getState().lastAction.slice(0, 5))
         if((todos || newvalue) && store.getState().lastAction.slice(0, 5) === "CLEAR"){
             if(newvalue){
                 newvalue['id'] = todos[Object.keys(todos).length-1].id+1;
@@ -41,8 +40,6 @@ const Root = () => {
             }
             if(editvalue){
                 const edited = Object.values(todos).findIndex(el => el.id === editvalue.id);
-                console.log(todos[edited])
-
                 todos[edited] = editvalue
                 todos[edited]['etat'] = setNewValueEtat(editvalue.date)
             }
@@ -54,7 +51,6 @@ const Root = () => {
             setLoading(false)
         }   
     }, [todos, newvalue, editvalue]);
-
 // °°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°
     const createTodoGroup = (data, title) => {
