@@ -1,3 +1,5 @@
+import { store } from "../storage/store";
+
 export const signal = new AbortController();
 
 // fetch data
@@ -16,21 +18,6 @@ export const fetchData = (url, signal) => {
     return data;
 } 
 
-// export const postData = async (url, data) => {
-//     // const rawResponse = await fetch(url, {
-//     //     method: 'POST',
-//     //     headers: {
-//     //       'Accept': 'application/json',
-//     //       'Content-Type': 'application/json'
-//     //     },
-//     //     body: `name=${data.name}&detail=${data.detail}&date=${data.date}&label=${data.label}`
-//     //   });
-//     //   const content = await rawResponse.json();
-      
-//     //   console.log(content, `name=${data.name}&detail=${data.detail}&date=${data.date}&label=${data.label}`)
-//     //   return content;
-
-// }
 export const postTodoData = (url, value) => {
     
     var formdata = new FormData();
@@ -47,8 +34,10 @@ export const postTodoData = (url, value) => {
     fetch(url, requestOptions)
       .then(response => response.text())
       .then(result => {
-          if(result !== 'true'){
-              alert(`Il y a eu un problème, désolé :( ${result}`)
+          if(!result){
+              alert(`Il y a eu un problème, désolé :(`)
+          }else{
+            store.dispatch({type : "CLEARRELOAD", data: {data: {id: parseInt(result),...value}}})
           }
         })
       .catch(error => alert(`Il y a eu un problème, désolé :( ${error}`));
@@ -66,6 +55,8 @@ export const delTodo = (url, id) => {
     .then(result => {
       if(result !== 'true'){
           alert(`Il y a eu un problème, désolé :( ${result}`)
+      }else{
+        store.dispatch({type: "CLEARDEL", data: id})
       }
     })
     .catch(error => alert(`Il y a eu un problème, désolé :( ${error}`));
@@ -89,6 +80,8 @@ export const editTodo = (url, data, id) => {
     .then(result => {
       if(result !== 'true'){
           alert(`Il y a eu un problème, désolé :( ${result}`)
+      }else{
+        store.dispatch({type : "CLEAREDIT", data: {id: id, ...data}})
       }
     })
     .catch(error => alert(`Il y a eu un problème, désolé :( ${error}`));

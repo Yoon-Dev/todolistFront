@@ -1,5 +1,7 @@
 html, body{
   overflow-x: hidden;
+  background-color: #eee3;
+  min-height: 100vh;
 }
 
 .App {
@@ -38,7 +40,7 @@ html, body{
 /* TODO */
 /* °°°°°°°°°°°°°°°°°°°°° */
 .todo-item{
-  margin: 0px 10% 15px 10%;
+  padding: 0px 10% 15px 10%;
 }
 .todo-done{
   text-align: end;
@@ -46,9 +48,62 @@ html, body{
 .todo-edit{
   text-align: start;
 }
+.late{
+  background-color: red !important;
+}
+.late *{
+  color: white !important;
+}
 /* °°°°°°°°°°°°°°°°°°°°° */
 /* ROOT */
 /* °°°°°°°°°°°°°°°°°°°°° */
 .mt-container{
   margin-top: 10vh;
 }
+/* °°°°°°°°°°°°°°°°°°°°° */
+/* FORM */
+/* °°°°°°°°°°°°°°°°°°°°° */
+.form-contain{
+  min-height: 80vh;
+}
+.form-active *{
+  filter: blur(1.17rem) !important;
+}
+.form-card{
+  border-radius: 50px !important;
+}
+.form-item{
+  width: 70% !important;
+  background-color: rgb(238, 238, 238) !important;
+  border: none !important;
+  border-radius: 5px !important;
+  min-height: 2.5rem;
+}
+.form-item div::before{
+  border: none !important;
+}
+/* °°°°°°°°°°°°°°°°°°°°° */
+/* navbar */
+/* °°°°°°°°°°°°°°°°°°°°° */
+.navbar{
+  z-index: 0 !important;
+}
+.navbar *{
+  z-index: 0 !important;
+}
+/* °°°°°°°°°°°°°°°°°°°°° */
+/* EMPTY */
+/* °°°°°°°°°°°°°°°°°°°°° */
+.empty{
+  max-width: 80vw;
+  max-height: 200px;
+  border-radius: 15px;
+  box-shadow: 0px 0px 54px 1px rgba(0, 0, 0, 0.15);
+}
+@media (min-width: 768px) {
+  .empty{
+    max-height: 600px;
+  }
+}
+
+ 

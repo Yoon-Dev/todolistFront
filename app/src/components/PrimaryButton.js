@@ -3,11 +3,14 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { store } from '../storage/store';
 
-const PrimaryButton = () => {
+const PrimaryButton = props => {
         return(
-            <Fab color="primary" aria-label="add" className="float" onClick={() => store.dispatch({ type: 'ADDTODO', data: null})}>
-                <AddIcon />
-            </Fab>
+            <div className={props.state ? "form-active float" : "float"} >
+                <Fab color="primary" aria-label="add" onClick={() => store.dispatch({ type: 'ADDTODO', data: null})}>
+                    <AddIcon />
+                </Fab>
+            </div>
+
         )
 }
 

@@ -15,11 +15,9 @@ const Form = () => {
         switch (type) {
             case 'todo':
                 postTodoData(process.env.REACT_APP_API_ADDTODO, value)
-                store.dispatch({type : "CLEARRELOAD", data: value})
                 break;
             case 'edittodo':
                 editTodo(process.env.REACT_APP_API_EDITTODO, value, id)
-                store.dispatch({type : "CLEAREDIT", data: {id: id, ...value}})
                 break;
             case 'label':
                 break;
@@ -34,8 +32,8 @@ const Form = () => {
     switch (true) {
         case isTodoActive:
             return(
-                <Grid container className="abs">
-                    <Grid item xs={12}>
+                <Grid container className="abs form">
+                    <Grid item xs={10}>
                         <TodoForm add={addDb} edit={store.getState().edit}/>
                     </Grid>
                 </Grid>            

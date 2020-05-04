@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import ClearForm from './ClearForm';
 import TextField from '@material-ui/core/TextField';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import { toRealDate } from '../utils/date';
 
 const TodoForm = props => {
@@ -32,31 +31,38 @@ const TodoForm = props => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
         return(
-            <Card>
+            <Card className="form-card">
                 <CardContent>
-                    <Grid container>
+                    <Grid container className="form-contain">
                         <ClearForm/>
                         <Grid item xs={12}>
-                            <TextField label="Name" value={name} onChange={e => setName(e.target.value)}/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextareaAutosize aria-label="detail" placeholder="Detail" value={detail} onChange={e => setDetail(e.target.value)}/>
+                            <TextField label="Nom" value={name} onChange={e => setName(e.target.value)} multiline className="form-item"/>
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
-                                label="Next appointment"
+                                id="standard-multiline-flexible"
+                                label="Detail"
+                                multiline
+                                value={detail}
+                                onChange={e => setDetail(e.target.value)} 
+                                className="form-item"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                label="Dead line"
                                 type="date"
                                 defaultValue={date}
                                 onChange={e => setDate(e.target.value)}
                                 InputLabelProps={{
                                 shrink: true,
                                 }}
+                                className="form-item"
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <Button onClick={handleClick}>Ajouter</Button>
+                            <Button onClick={handleClick} variant="contained" color="primary">Enregistrer</Button>
                         </Grid>
-
                     </Grid>
                 </CardContent>
           </Card>

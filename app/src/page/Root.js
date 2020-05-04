@@ -6,7 +6,7 @@ import TodoGroup from '../components/TodoGroup';
 import { store } from '../storage/store';
 import { setNewValueEtat } from '../utils/date';
 
-const Root = () => {
+const Root = props => {
     let todos = useTodos()
     const todosRef = useRef(todos)
     const [loading, setLoading] = useState(true);
@@ -14,6 +14,7 @@ const Root = () => {
     const [tomorowTask, setTomorowTask] = useState(null);
     const [newvalue, setNewvalue] = useState(null);
     const [editvalue, setEditvalue] = useState(null);
+    const [lastTodo, setlastTodo] = useState(null);
     store.subscribe(() => {
         if(store.getState().reload){
             setNewvalue(store.getState().reload)
@@ -25,6 +26,11 @@ const Root = () => {
         }else{
             setEditvalue(null)
         }
+        if(store.getState().lastTodo){
+            setlastTodo(store.getState().lastTodo)
+        }else{
+            setlastTodo(null)
+        }
     })
     useEffect(() => {
         todosRef.current = todos
@@ -32,13 +38,13 @@ const Root = () => {
 // °°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°
     useEffect(() => {
-        if((todos || newvalue) && store.getState().lastAction.slice(0, 5) === "CLEAR"){
-            if(newvalue){
-                newvalue['id'] = todos[Object.keys(todos).length-1].id+1;
+        if((todos || newvalue) && store.getState().lastAction.slice(0, 5) === "CLEAR" && store.getState().lastAction !== "CLEARDEL"){
+            if(newvalue && todos[0]){
                 newvalue['etat'] = setNewValueEtat(newvalue.date)
                 todos[Object.keys(todos).length] = newvalue
-            }
-            if(editvalue){
+            }else if(newvalue){
+                todos[0] = newvalue
+            }else if(editvalue){
                 const edited = Object.values(todos).findIndex(el => el.id === editvalue.id);
                 todos[edited] = editvalue
                 todos[edited]['etat'] = setNewValueEtat(editvalue.date)
@@ -46,11 +52,14 @@ const Root = () => {
             const tabdata = Object.values(todos)
             const today = tabdata.filter(todo => todo.etat !== 'bon');
             const avenir = tabdata.filter(todo => todo.etat === 'bon');
-            setTodayTask(createTodoGroup(today, `A faire aujourd'hui`))
-            setTomorowTask(createTodoGroup(avenir, 'A faire plus tard'))
+            setTodayTask(createTodoGroup(today, `À faire aujourd'hui`))
+            setTomorowTask(createTodoGroup(avenir, 'À faire plus tard'))
             setLoading(false)
+        }else if(lastTodo){
+            const removed = Object.values(todos).findIndex(el => el.id === lastTodo);
+            delete todos[removed]
         }   
-    }, [todos, newvalue, editvalue]);
+    }, [todos, newvalue, editvalue, lastTodo]);
 // °°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°
     const createTodoGroup = (data, title) => {
@@ -60,7 +69,7 @@ const Root = () => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
     return(
-        <Grid container className="mt-container" justify="center">
+        <Grid container className={props.state ? "form-active mt-container" : "mt-container"} justify="center">
             { loading ? <Loading big={true}/> : 
             <Fragment>
                 <Grid item xs={12}>

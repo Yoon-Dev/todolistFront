@@ -37,32 +37,35 @@ const Navbar = props => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
         return(
-            <Slide appear={false} direction="down" in={!trigger}>
-                <AppBar position="fixed">
-                <Toolbar>  
-                    <Grid container>
-                        <Grid item xs={12}>
-                            <div className={classes.search}>
-                                <div className={classes.searchIcon}>
-                                    <SearchIcon/>
-                                </div>
-                                <div>
-                                    <InputBase
-                                    placeholder="Search..."
-                                    type="text"
-                                    value={values.input}
-                                    onChange={(e) => handleChange(e, 'input')}
-                                    endAdornment={<EndAdornment click={() => handleClick()} value={values}/>}
-                                    autoFocus={true}
-                                    size="large"
-                                    />
-                                </div>
-                            </div>
-                        </Grid>
-                    </Grid>
-                </Toolbar>
-                </AppBar>
-            </Slide>
+            <div className={props.state ? "form-active navbar" : "navbar"}>
+                <Slide appear={false} direction="down" in={!trigger}>
+                    <AppBar position="fixed" className={classes.bg}>
+                        <Toolbar>  
+                            <Grid container>
+                                <Grid item xs={12} className={classes.scontain}>
+                                    <div className={classes.search}>
+                                        <div className={classes.searchIcon}>
+                                            <SearchIcon/>
+                                        </div>
+                                        <div className={classes.inputsearch}>
+                                            <InputBase
+                                            placeholder="Search..."
+                                            type="text"
+                                            value={values.input}
+                                            onChange={(e) => handleChange(e, 'input')}
+                                            endAdornment={<EndAdornment click={() => handleClick()} value={values}/>}
+                                            autoFocus={true}
+                                            size="large"
+                                            />
+                                        </div>
+                                    </div>
+                                </Grid>
+                            </Grid>
+                        </Toolbar>
+                    </AppBar>
+                </Slide>
+            </div>
+            
         )
 }
 
@@ -70,22 +73,36 @@ const useStyles = makeStyles((theme) => ({
     search: {
     //   position: 'relative',
       borderRadius: theme.shape.borderRadius,
-      backgroundColor: fade(theme.palette.common.white, 0.15),
-      '&:hover': {
-        backgroundColor: fade(theme.palette.common.white, 0.25),
-      },
-      '&:focus': {
-        backgroundColor: fade(theme.palette.common.white, 0.25),
-      },
       display: 'inline-flex',
       padding: '.6em',
       transition: 'all .3s ease',
+      minWidth: "100%",
+      [theme.breakpoints.up('md')]: {
+        minWidth: "20%",
+    },
     },
     searchIcon: {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
     },
+    scontain: {
+        display: 'flex',
+        justifyContent: "center",
+        [theme.breakpoints.up('md')]: {
+            justifyContent: "flex-end",
+        },
+    },
+    inputsearch: {
+        minWidth: "100%",
+        '& *': {
+            minWidth: "100%",
+        }
+    },
+    bg: {
+        boxShadow: 'none',
+        backgroundColor: fade(theme.palette.primary.main, 0.55),
+    }
 }));
 
 export default Navbar;
