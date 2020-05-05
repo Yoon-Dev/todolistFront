@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import ClearForm from './ClearForm';
 import TextField from '@material-ui/core/TextField';
 import { toRealDate } from '../utils/date';
+import Fade from 'react-reveal/Fade';
 
 const TodoForm = props => {
     const [name, setName] = useState(props.edit ? props.edit.name : '');
@@ -31,6 +32,7 @@ const TodoForm = props => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
         return(
+        <Fade duration={300}>
             <Card className="form-card">
                 <CardContent>
                     <Grid container className="form-contain">
@@ -65,7 +67,8 @@ const TodoForm = props => {
                         </Grid>
                     </Grid>
                 </CardContent>
-          </Card>
+            </Card>
+        </Fade>
         )
 }
 

@@ -37,7 +37,7 @@ const Navbar = props => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
         return(
-            <div className={props.state ? "form-active navbar" : "navbar"}>
+            <div className="navbar">
                 <Slide appear={false} direction="down" in={!trigger}>
                     <AppBar position="fixed" className={classes.bg}>
                         <Toolbar>  
@@ -97,11 +97,12 @@ const useStyles = makeStyles((theme) => ({
         minWidth: "100%",
         '& *': {
             minWidth: "100%",
+            color: "white"
         }
     },
     bg: {
         boxShadow: 'none',
-        backgroundColor: fade(theme.palette.primary.main, 0.55),
+        // backgroundColor: fade(theme.palette.primary.main, 0.55),
     }
 }));
 

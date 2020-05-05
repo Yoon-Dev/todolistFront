@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Edit';
 import { store } from '../storage/store';
 import { setNewValueEtat } from '../utils/date';
+import Fade from 'react-reveal/Fade';
 
 
 const Todo = props => {
@@ -29,66 +30,56 @@ const Todo = props => {
             }
         }
     })
-// °°°°°°°°°°°°°°°°°°°°°
-// °°°°°°°°°°°°°°°°°°°°°
-    // const handleClick = type => {
-    //     switch (type) {
-    //         case 'del':
-    //             delTodo(process.env.REACT_APP_DEL_TODO, props.data.id)
-    //             self.current.classList.add('hidden')
-    //             break;
-        
-    //         default:
-    //             break;
-    //     }
-    // }
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
         return(
-            <Grid item xs={12} md={4} ref={self} className="todo-item" data-name={name}>
-                <Card className={props.data.etat === "retard" ? "late" : null}>
-                    <CardContent>
-                        <Grid container justify="center">
-                            <Grid item xs={6} className="todo-edit">
-                                <Button onClick={() => store.dispatch({type: 'ADDTODO', data: props.data})}>
-                                    <EditIcon/>
-                                </Button>       
-                            </Grid>
-                            <Grid item xs={6} className="todo-done">
-                                <Button onClick={() => props.handleDel(self.current, parseInt(props.data.id))}>
-                                    <DoneAllIcon/>
-                                </Button>       
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Typography variant="h5" component="h2">
-                                    {name}
-                                </Typography>
-                            </Grid>
-                            { etat === "bon" ?
-                            <Grid item xs={12}>
-                                <Typography variant="h5" component="h2">
-                                    {date}
-                                </Typography>
-                            </Grid>
-                            : null }
-                            { detail ? 
-                                    <Fragment>
-                                        <Grid item xs={12} onClick={() => {setRead(!read)}}>
-                                            <Typography variant="overline" color="textSecondary" component="p">
-                                                {read ? 'Cacher' : 'Detail'}
-                                            </Typography>
-                                        </Grid>
-                                        <Grid item xs={12} className={read ? 'show' : 'hidden'}>
-                                            <Typography variant="body1" color="textPrimary" component="p">
-                                            {detail}
-                                            </Typography>
-                                        </Grid>
-                                    </Fragment>                             
-                            : null}
-                        </Grid>
-                    </CardContent>  
-                </Card>
-            </Grid>
+                <Grid item xs={12} md={4} ref={self} className="todo-item" data-name={name}>
+                    <Fade collapse duration={800}>
+                        <Card className={props.data.etat === "retard" ? "late" : null}>
+                            <CardContent>
+                                <Grid container justify="center">
+                                    <Grid item xs={6} className="todo-edit">
+                                        <Button onClick={() => store.dispatch({type: 'ADDTODO', data: props.data})}>
+                                            <EditIcon/>
+                                        </Button>       
+                                    </Grid>
+                                    <Grid item xs={6} className="todo-done">
+                                        <Button onClick={() => props.handleDel(self.current, parseInt(props.data.id))}>
+                                            <DoneAllIcon/>
+                                        </Button>       
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <Typography variant="h5" component="h2">
+                                            {name}
+                                        </Typography>
+                                    </Grid>
+                                    { etat === "bon" ?
+                                    <Grid item xs={12}>
+                                        <Typography variant="h5" component="h2">
+                                            {date}
+                                        </Typography>
+                                    </Grid>
+                                    : null }
+                                    { detail ? 
+                                            <Fragment>
+                                                <Grid item xs={12} onClick={() => {setRead(!read)}}>
+                                                    <Typography variant="overline" color="textSecondary" component="p">
+                                                        {read ? 'Cacher' : 'Detail'}
+                                                    </Typography>
+                                                </Grid>
+                                                <Grid item xs={12} className={read ? 'show' : 'hidden'}>
+                                                    <Typography variant="body1" color="textPrimary" component="p">
+                                                    {detail}
+                                                    </Typography>
+                                                </Grid>
+                                            </Fragment>                             
+                                    : null}
+                                </Grid>
+                            </CardContent>  
+                        </Card>
+                    </Fade>
+                </Grid>
+            
             
 
         )

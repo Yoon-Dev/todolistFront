@@ -1,10 +1,11 @@
 import React from 'react';
+import Fade from 'react-reveal/Fade';
 
 const Empty = () => {
         return(
-            <div>
+            <Fade>
                 <img src="/img/empty.gif" alt="Empty" className="empty"/>
-            </div>
+            </Fade>
         )
 }
 

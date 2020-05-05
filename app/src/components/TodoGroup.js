@@ -11,18 +11,20 @@ const TodoGroup = props => {
 // °°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°
     useEffect(() => {
-        const createTodos = data => {
-            const todos = data.map(item =>
-                <Todo key={item.id} data={item} handleDel={handleDel}/>
-            )
-            return todos
-        }
+
         if(props.data.length > 0){
-            setTodo(createTodos(props.data))
+            setTodo(props.data.map(item =>
+                <Todo key={item.id} data={item} handleDel={handleDel}/>
+            ))
         }else{
             setTodo(<Empty/>)
         }
+        return () => {
+            setTodo(null)
+        };
+        
     }, [props.data]);
+
 // °°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°
     const handleDel = (el, id) => {
@@ -36,8 +38,8 @@ const TodoGroup = props => {
             <Grid container ref={self} justify="center">
                 <Grid item xs={12}>
                     <h1>{props.title}</h1>
-                </Grid>      
-                { todo ? todo : <Loading big={false}/> }
+                </Grid>  
+                { todo ? todo : <Loading big={false}/> } 
             </Grid>  
         )
 }

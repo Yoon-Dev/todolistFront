@@ -63,6 +63,9 @@ html, body{
 /* °°°°°°°°°°°°°°°°°°°°° */
 /* FORM */
 /* °°°°°°°°°°°°°°°°°°°°° */
+.form{
+  z-index: 2 !important;
+}
 .form-contain{
   min-height: 80vh;
 }
@@ -82,14 +85,32 @@ html, body{
 .form-item div::before{
   border: none !important;
 }
+.trans-form{
+  transition: filter 1s ease-in !important;
+}
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  opacity: 1;
+  transition: all 350ms ease-in;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+  transition: all 200ms linear;
+}
+
 /* °°°°°°°°°°°°°°°°°°°°° */
 /* navbar */
 /* °°°°°°°°°°°°°°°°°°°°° */
 .navbar{
-  z-index: 0 !important;
+  z-index: 2 !important;
 }
 .navbar *{
-  z-index: 0 !important;
+  z-index: 2 !important;
 }
 /* °°°°°°°°°°°°°°°°°°°°° */
 /* EMPTY */

@@ -38,27 +38,31 @@ const Root = props => {
 // °°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°
     useEffect(() => {
-        if((todos || newvalue) && store.getState().lastAction.slice(0, 5) === "CLEAR" && store.getState().lastAction !== "CLEARDEL"){
-            if(newvalue && todos[0]){
-                newvalue['etat'] = setNewValueEtat(newvalue.date)
-                todos[Object.keys(todos).length] = newvalue
-            }else if(newvalue){
-                todos[0] = newvalue
-            }else if(editvalue){
-                const edited = Object.values(todos).findIndex(el => el.id === editvalue.id);
-                todos[edited] = editvalue
-                todos[edited]['etat'] = setNewValueEtat(editvalue.date)
+        if((todos || newvalue) && store.getState().lastAction.slice(0, 5) === "CLEAR"){
+            switch (true) {
+                case newvalue !== null:
+                    newvalue['etat'] = setNewValueEtat(newvalue.date)
+                    todos[Object.keys(todos).length] = newvalue
+                    break;
+                case editvalue !== null: 
+                    const edited = Object.values(todos).findIndex(el => el.id === editvalue.id);
+                    todos[edited] = editvalue
+                    todos[edited]['etat'] = setNewValueEtat(editvalue.date)
+                    break;
+                case lastTodo !== null:
+                    const removed = Object.values(todos).findIndex(el => el.id === lastTodo);
+                    todos[removed]['etat'] = 'delete';
+                    break;
+                default:
+                    break;
             }
             const tabdata = Object.values(todos)
-            const today = tabdata.filter(todo => todo.etat !== 'bon');
+            const today = tabdata.filter(todo => todo.etat === 'today' || todo.etat === 'retard');
             const avenir = tabdata.filter(todo => todo.etat === 'bon');
             setTodayTask(createTodoGroup(today, `À faire aujourd'hui`))
             setTomorowTask(createTodoGroup(avenir, 'À faire plus tard'))
             setLoading(false)
-        }else if(lastTodo){
-            const removed = Object.values(todos).findIndex(el => el.id === lastTodo);
-            delete todos[removed]
-        }   
+        }
     }, [todos, newvalue, editvalue, lastTodo]);
 // °°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°
@@ -69,7 +73,7 @@ const Root = props => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
     return(
-        <Grid container className={props.state ? "form-active mt-container" : "mt-container"} justify="center">
+        <Grid container className="mt-container"justify="center">
             { loading ? <Loading big={true}/> : 
             <Fragment>
                 <Grid item xs={12}>

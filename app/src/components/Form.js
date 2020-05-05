@@ -1,14 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { store } from '../storage/store';
 import Grid from '@material-ui/core/Grid';
 import TodoForm from './TodoForm';
 import { postTodoData, editTodo } from '../utils/data';
 
-const Form = () => {
-    const [isTodoActive, setisTodoActive] = useState(store.getState().addtodo);
-    store.subscribe(() => {
-        setisTodoActive(store.getState().addtodo)
-    })
+const Form = props => {
 // °°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°
     const addDb = (type, value, id = null) => {
@@ -30,13 +26,13 @@ const Form = () => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
     switch (true) {
-        case isTodoActive:
+        case props.in:
             return(
                 <Grid container className="abs form">
                     <Grid item xs={10}>
                         <TodoForm add={addDb} edit={store.getState().edit}/>
                     </Grid>
-                </Grid>            
+                </Grid>  
             )
         default:
             return(
