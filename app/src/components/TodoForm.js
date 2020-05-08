@@ -3,7 +3,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import ClearForm from './ClearForm';
 import TextField from '@material-ui/core/TextField';
 import { toRealDate } from '../utils/date';
 import Fade from 'react-reveal/Fade';
@@ -35,8 +34,7 @@ const TodoForm = props => {
         <Fade duration={300}>
             <Card className="form-card">
                 <CardContent>
-                    <Grid container className="form-contain">
-                        <ClearForm/>
+                    <Grid container className="form-contain">            
                         <Grid item xs={12}>
                             <TextField label="Nom" value={name} onChange={e => setName(e.target.value)} multiline className="form-item"/>
                         </Grid>

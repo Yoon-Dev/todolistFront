@@ -36,6 +36,10 @@ html, body{
   right: 0;
   bottom: 0;
 }
+.float-del{
+  right: 0 !important;
+  bottom: 0 !important;
+}
 /* °°°°°°°°°°°°°°°°°°°°° */
 /* TODO */
 /* °°°°°°°°°°°°°°°°°°°°° */
@@ -67,13 +71,14 @@ html, body{
   z-index: 2 !important;
 }
 .form-contain{
-  min-height: 80vh;
+  min-height: 100vh;
+  align-items: center;
 }
 .form-active *{
   filter: blur(1.17rem) !important;
 }
 .form-card{
-  border-radius: 50px !important;
+  border-radius: 0px !important;
 }
 .form-item{
   width: 70% !important;

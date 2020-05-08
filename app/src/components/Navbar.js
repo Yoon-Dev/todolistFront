@@ -3,7 +3,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
-import { makeStyles, fade } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid';
 import EndAdornment from './EndAdornment';
 import { filterfct } from '../utils/filtre';

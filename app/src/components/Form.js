@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { store } from '../storage/store';
 import Grid from '@material-ui/core/Grid';
 import TodoForm from './TodoForm';
 import { postTodoData, editTodo } from '../utils/data';
+import PrimaryButton from './PrimaryButton';
 
-const Form = props => {
+const Form = () => {
+// °°°°°°°°°°°°°°°°°°°°°
+// °°°°°°°°°°°°°°°°°°°°°
+    const [isTodoActive, setisTodoActive] = useState(store.getState().addtodo);
+    store.subscribe(() => {
+        setisTodoActive(store.getState().addtodo)
+    })
 // °°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°
     const addDb = (type, value, id = null) => {
@@ -26,11 +33,12 @@ const Form = props => {
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
     switch (true) {
-        case props.in:
+        case isTodoActive:
             return(
                 <Grid container className="abs form">
-                    <Grid item xs={10}>
+                    <Grid item xs={12}>
                         <TodoForm add={addDb} edit={store.getState().edit}/>
+                        <PrimaryButton type="del"/>
                     </Grid>
                 </Grid>  
             )

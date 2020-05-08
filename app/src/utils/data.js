@@ -50,9 +50,10 @@ export const delTodo = (url, id) => {
     redirect: 'follow'
   };
   
-  fetch(`${url}/${id}`, requestOptions)
+  fetch(`${url}id=${id}`, requestOptions)
     .then(response => response.text())
     .then(result => {
+      console.log(result, `${url}id=${id}`)
       if(result !== 'true'){
           alert(`Il y a eu un problème, désolé :( ${result}`)
       }else{
@@ -75,9 +76,10 @@ export const editTodo = (url, data, id) => {
     redirect: 'follow'
   };
   
-  fetch(`${url}/${parseInt(id)}`, requestOptions)
+  fetch(`${url}id=${parseInt(id)}`, requestOptions)
     .then(response => response.text())
     .then(result => {
+      console.log(result, `${url}id=${parseInt(id)}`)
       if(result !== 'true'){
           alert(`Il y a eu un problème, désolé :( ${result}`)
       }else{

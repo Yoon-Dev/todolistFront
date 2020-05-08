@@ -7,30 +7,24 @@ import { TodoProvider } from './services/Todo';
 import './App.css';
 import { store } from './storage/store';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-import brown from '@material-ui/core/colors/brown';
+import lightGreen from '@material-ui/core/colors/lightGreen';
 
 function App() {
-  const [isFormActive, setisFormActive] = useState(false);
-  store.subscribe(() => {
-    if(store.getState().lastAction.slice(0, 5) !== "CLEAR" ){
-      setisFormActive(true)
-    }else{
-      setisFormActive(false)
-    }
-})
+  // const [isFormActive, setisFormActive] = useState(false);
+
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
   return (
     <MuiThemeProvider theme={theme}>
       <div  className="App">
-        <div className={isFormActive ? "form-active trans-form" : "trans-form"}>
+        <div>
           <Navbar/>
           <TodoProvider>
             <Root/>
           </TodoProvider>   
-          <PrimaryButton click={() => setisFormActive(true)}/> 
+          <PrimaryButton/> 
         </div>
-        <Form in={isFormActive}/>
+        <Form/>
       </div>
     </MuiThemeProvider>
   );
@@ -39,7 +33,7 @@ function App() {
 // °°°°°°°°°°°°°°°°°°°°°
 const theme = createMuiTheme({
   palette: {
-    primary: brown,
+    primary: lightGreen,
     secondary: {
       main: '#f44336',
     },
